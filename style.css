@@ -297,12 +297,13 @@ h1 {
     -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
 }
+
 .control-btn,
 .control-btn:focus,
 .control-btn:active {
-  outline: none;
-  background: transparent;
-  color: #ffffff;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
 }
 
 .control-btn:hover {
@@ -313,6 +314,145 @@ h1 {
 .control-btn:active {
     transform: scale(0.9);
 }
+
+@media (max-width: 1200px) {
+    aside {
+        display: none !important;
+    }
+}
+/* --- KONTAKT --- */
+.contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 45%;
+    box-sizing: border-box;
+}
+
+.channel-block {
+    border: 1px solid #ffffff;
+    padding: 25px;
+    background-color: #000000;
+}
+
+.channel-block h3,
+.transmission-panel h3 {
+    font-size: 14px;
+    color: #888888;
+    margin-top: 0;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* Linki i maile */
+.email-item {
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.channel-label {
+    font-family: monospace;
+    color: #555555;
+    margin-right: 10px;
+}
+
+.contact-link {
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px dashed #444444;
+}
+
+.contact-link:hover {
+    color: #888888;
+    border-bottom-color: #888888;
+}
+
+.social-links-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.social-btn {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 13px;
+    font-family: monospace;
+    transition: all 0.2s ease;
+}
+
+.social-btn:hover {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+.transmission-panel {
+    border: 1px solid #ffffff;
+    padding: 25px;
+    background-color: #000000;
+}
+
+.terminal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-family: monospace;
+    font-size: 11px;
+    color: #888888;
+    letter-spacing: 1px;
+}
+
+.terminal-form input,
+.terminal-form textarea {
+    background-color: #050505;
+    border: 1px solid #333333;
+    color: #ffffff;
+    padding: 12px;
+    font-family: monospace;
+    font-size: 13px;
+    outline: none;
+    border-radius: 0;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.terminal-form input:focus,
+.terminal-form textarea:focus {
+    border-color: #ffffff;
+    background-color: #0c0c0c;
+}
+
+.terminal-form input::placeholder,
+.terminal-form textarea::placeholder {
+    color: #444444;
+}
+
+.transmit-btn {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    padding: 15px;
+    font-family: monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+}
+
+.transmit-btn:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
 
 @media (max-width: 850px) {
     .main-content {
@@ -505,15 +645,22 @@ h1 {
         max-height: 320px;
         margin-bottom: 3vh !important;
     }
+
     .control-btn:hover {
-    background: transparent;
-    color: #ffffff;
+        background: transparent;
+        color: #ffffff;
     }
 
     .control-btn.active {
-    background: rgb(255, 255, 255) !important;
-    color:#000000 !important;
-    transform: scale(0.9);
+        background: rgb(255, 255, 255) !important;
+        color: #000000 !important;
+        transform: scale(0.9);
     }
 
+    .contact-grid {
+        max-width: 100%;
+    }
+    .social-links-grid {
+    gap: 13px;
+}
 }
