@@ -1,12 +1,12 @@
-const TOTAL_FRAMES = 43;
+const TOTAL_FRAMES = 104;
 const FRICTION = 0.99;
-const IDLE_SPEED_MAGNITUDE = 0.25;
+const IDLE_SPEED_MAGNITUDE = 0.28;
 const ACCELERATION = 0.25;
-const MAX_SPEED = 13;
+const MAX_SPEED = 10;
 
 function getFrameSrc(index) {
-    const formattedIndex = String(index).padStart(2, '0');
-    return `/fots/ezgif-split/frame_${formattedIndex}_delay-0.1s.gif`;
+    const formattedIndex = String(index).padStart(3, '0');
+    return `/fots/ezgif-split1/frame_${formattedIndex}_delay-0.04s.gif`;
 }
 
 const imgElement = document.getElementById('skurw-frame');
