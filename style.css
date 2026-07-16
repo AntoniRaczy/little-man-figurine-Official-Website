@@ -171,8 +171,8 @@ h1 {
 }
 
 .social-icons img {
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
     object-fit: contain;
     filter: grayscale(100%) invert(1) contrast(1000%);
     opacity: 0.8;
