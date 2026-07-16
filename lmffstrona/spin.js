@@ -1,6 +1,8 @@
 const TOTAL_FRAMES = 43;
-const BASE_SPEED = 55;
-const FAST_SPEED = 10;
+const FRICTION = 0.99;
+const IDLE_SPEED_MAGNITUDE = 0.25;
+const ACCELERATION = 0.25;
+const MAX_SPEED = 13;
 
 function getFrameSrc(index) {
     const formattedIndex = String(index).padStart(2, '0');
@@ -12,53 +14,65 @@ const btnLeft = document.getElementById('btn-left');
 const btnRight = document.getElementById('btn-right');
 
 let currentFrame = 0;
-let direction = 1;
-let currentSpeed = BASE_SPEED;
-let animationInterval = null;
+let targetIdleSpeed = IDLE_SPEED_MAGNITUDE; 
+let speed = targetIdleSpeed;
+let frameAccumulator = 0;
 
-function tick() {
-    currentFrame = (currentFrame + direction + TOTAL_FRAMES) % TOTAL_FRAMES;
-    imgElement.src = getFrameSrc(currentFrame);
-}
+function updateAnimation() {
+    speed = targetIdleSpeed + (speed - targetIdleSpeed) * FRICTION;
 
-function startAnimation() {
-    clearInterval(animationInterval);
-    animationInterval = setInterval(tick, currentSpeed);
+    if (speed !== 0) {
+        frameAccumulator += speed;
+
+        if (frameAccumulator >= 1) {
+            const framesToMove = Math.floor(frameAccumulator);
+            currentFrame = (currentFrame + framesToMove + TOTAL_FRAMES) % TOTAL_FRAMES;
+            frameAccumulator -= framesToMove;
+            imgElement.src = getFrameSrc(currentFrame);
+        } else if (frameAccumulator <= -1) {
+            const framesToMove = Math.ceil(frameAccumulator);
+            currentFrame = (currentFrame + framesToMove + TOTAL_FRAMES) % TOTAL_FRAMES;
+            frameAccumulator -= framesToMove;
+            imgElement.src = getFrameSrc(currentFrame);
+        }
+    }
+    requestAnimationFrame(updateAnimation);
 }
 
 function setupButton(button, targetDirection) {
     let isHolding = false;
     let holdTimeout = null;
 
+    const impulse = () => {
+        targetIdleSpeed = targetDirection * IDLE_SPEED_MAGNITUDE;
+
+        speed += targetDirection * ACCELERATION;
+        if (Math.abs(speed) > MAX_SPEED) {
+            speed = Math.sign(speed) * MAX_SPEED;
+        }
+    };
+
     const onPress = (e) => {
         e.preventDefault();
 
         if (e.cancelable) e.preventDefault();
-
         button.classList.add('active');
 
-        direction = targetDirection;
+        impulse();
 
+        clearTimeout(holdTimeout);
         holdTimeout = setTimeout(() => {
             isHolding = true;
-            currentSpeed = FAST_SPEED;
-            startAnimation();
-        }, 100);
+            impulse();
+        }, 50);
     };
 
     const onRelease = (e) => {
         if (e.cancelable) e.preventDefault();
-
         button.classList.remove('active');
-        clearTimeout(holdTimeout);
 
-        if (isHolding) {
-            isHolding = false;
-            currentSpeed = BASE_SPEED;
-            startAnimation();
-        } else {
-            startAnimation();
-        }
+        clearTimeout(holdTimeout);
+        isHolding = false;
     };
 
     button.addEventListener('mousedown', onPress);
@@ -70,10 +84,10 @@ function setupButton(button, targetDirection) {
     button.addEventListener('touchcancel', onRelease, { passive: false });
 }
 
-setupButton(btnLeft, -1);
-setupButton(btnRight, 1);
+setupButton(btnLeft, 1);
+setupButton(btnRight, -1);
 
-startAnimation();
+requestAnimationFrame(updateAnimation);
 
 function preloadFrames() {
     for (let i = 0; i < TOTAL_FRAMES; i++) {
