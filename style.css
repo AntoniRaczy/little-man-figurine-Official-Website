@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 20px;
     text-transform: uppercase;
+    padding-bottom: 60px;
 }
 
 .wrapper {
@@ -448,6 +449,41 @@ h1 {
     color: #000000;
 }
 
+.system-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;        
+    background-color: #000000; 
+    z-index: 9999;          
+    
+    font-family: monospace;
+    font-size: 11px;
+    color: #444444;
+    letter-spacing: 1px;
+    box-sizing: border-box;
+}
+
+.copyright-text {
+    cursor: default;
+}
+
+.footer-divider {
+    margin: 0 10px;
+    color: #222222;
+}
+
+.footer-link {
+    color: #444444;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: #888888;
+}
 
 @media (max-width: 850px) {
     .main-content {
@@ -661,4 +697,8 @@ h1 {
     .video-content{
         margin-left: 0;
     }
+    .body {
+        padding: 0;
+    }
+    
 }
