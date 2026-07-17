@@ -135,7 +135,8 @@ h1 {
 }
 
 .side-panel a,
-.side-panel img {
+.side-panel img,
+.side-panel canvas {
     pointer-events: auto;
 }
 
